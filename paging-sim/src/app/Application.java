@@ -8,6 +8,7 @@ import model.PageSequence;
 import model.SimulationResult;
 import parser.InputParser;
 import policy.FIFOPageReplacementPolicy;
+import policy.RANDPageReplacementPolicy;
 import policy.PageReplacementPolicy;
 import java.io.File;
 import java.io.FileInputStream;
@@ -88,12 +89,20 @@ public class Application {
                 writer.println(sequence);
 
                 PageReplacementPolicy fifoPolicy = new FIFOPageReplacementPolicy();
-                SimulationResult result = fifoPolicy.simulate(sequence, config.getNumberOfFrames());
+                SimulationResult fifoResult = fifoPolicy.simulate(sequence, config.getNumberOfFrames());
 
-                writer.println(result.getPolicyName());
-                writer.println(result.getExecutionTimeSeconds());
-                writer.println(result.getPageFaults());
-                writer.println(result.getSwapStateFormatted());
+                writer.println(fifoResult.getPolicyName());
+                writer.println(fifoResult.getExecutionTimeSeconds());
+                writer.println(fifoResult.getPageFaults());
+                writer.println(fifoResult.getSwapStateFormatted());
+
+                PageReplacementPolicy randPolicy = new RANDPageReplacementPolicy();
+                SimulationResult randResult = randPolicy.simulate(sequence, config.getNumberOfFrames());
+
+                writer.println(randResult.getPolicyName());
+                writer.println(randResult.getExecutionTimeSeconds());
+                writer.println(randResult.getPageFaults());
+                writer.println(randResult.getSwapStateFormatted());
             }
         } catch (FileNotFoundException e) {
             System.err.println("Arquivo não encontrado - " + inputFileName);
