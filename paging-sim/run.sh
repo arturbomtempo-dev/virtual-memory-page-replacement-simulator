@@ -12,10 +12,10 @@ fi
 # Compile
 echo "Compilando..."
 
-javac -d bin src/exception/*.java src/validation/*.java src/model/*.java src/parser/*.java src/app/*.java
+javac -d bin src/exception/*.java src/validation/*.java src/model/*.java src/parser/*.java src/policy/*.java src/app/*.java
 
 if [ $? -ne 0 ]; then
-    echo "❌ Erro na compilação!"
+    echo "Erro na compilação!"
     exit 1
 fi
 
