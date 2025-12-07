@@ -54,11 +54,15 @@ public class PageSequence {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
+
         for (int i = 0; i < requests.size(); i++) {
-            if (i > 0)
+            if (i > 0) {
                 sb.append(" ");
+            }
+
             sb.append(requests.get(i));
         }
+
         return sb.toString();
     }
 }

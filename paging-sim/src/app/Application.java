@@ -6,51 +6,100 @@ import exception.SimulatorException;
 import model.SystemConfiguration;
 import model.PageSequence;
 import parser.InputParser;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Scanner;
 
 /**
- * Processa entrada padrão e executa simulações de políticas de substituição.
+ * Processa arquivos de entrada da pasta input/ e gera saídas na pasta output/.
  */
 public class Application {
 
+    private static final String INPUT_DIR = "input";
+    private static final String OUTPUT_DIR = "output";
+
     public static void main(String[] args) {
-        try {
-            Scanner sc = new Scanner(System.in);
+        createOutputDirectory();
+
+        File inputDir = new File(INPUT_DIR);
+
+        if (!inputDir.exists() || !inputDir.isDirectory()) {
+            System.err.println("Erro: Pasta 'input/' não encontrada!");
+            System.err.println("Crie a pasta 'input/' e adicione arquivos .txt de entrada.");
+            System.exit(1);
+        }
+
+        File[] inputFiles = inputDir.listFiles((dir, name) -> name.endsWith(".txt"));
+
+        if (inputFiles == null || inputFiles.length == 0) {
+            System.err.println("Erro: Nenhum arquivo .txt encontrado na pasta 'input/'");
+            System.exit(1);
+        }
+
+        for (File inputFile : inputFiles) {
+            processFile(inputFile);
+        }
+
+    }
+
+    /**
+     * Cria a pasta output se não existir.
+     */
+    private static void createOutputDirectory() {
+        File outputDir = new File(OUTPUT_DIR);
+
+        if (!outputDir.exists()) {
+            outputDir.mkdirs();
+        }
+    }
+
+    /**
+     * Processa um arquivo de entrada e gera o arquivo de saída correspondente.
+     */
+    private static void processFile(File inputFile) {
+        String inputFileName = inputFile.getName();
+        String outputFileName = inputFileName.replace(".txt", "_saida.txt");
+        File outputFile = new File(OUTPUT_DIR, outputFileName);
+
+        try (Scanner sc = new Scanner(new FileInputStream(inputFile));
+                PrintWriter writer = new PrintWriter(outputFile)) {
+
             InputParser parser = new InputParser(sc);
 
             SystemConfiguration config = parser.readConfiguration();
 
             List<PageSequence> sequences = parser.readSequences(config);
 
-            System.out.println(config.getPageSize());
-            System.out.println(config.getNumberOfFrames());
-            System.out.println(config.getSwapSize());
-            System.out.println();
+            writer.println(config.getPageSize());
+            writer.println(config.getNumberOfFrames());
+            writer.println(config.getSwapSize());
+            writer.println();
 
-            System.out.println(sequences.size());
-            System.out.println();
+            writer.println(sequences.size());
+            writer.println();
 
             for (PageSequence sequence : sequences) {
-                System.out.println(sequence);
+                writer.println(sequence);
                 // TODO: Implementar simulação das políticas (Tarefa 2+)
+                writer.println("FIFO");
+                writer.println("0");
+                writer.println("0");
+                writer.println("0");
             }
-
-            sc.close();
-
+        } catch (FileNotFoundException e) {
+            System.err.println("Arquivo não encontrado - " + inputFileName);
         } catch (InvalidInputException e) {
-            System.err.println("Erro na entrada: " + e.getMessage());
-            System.exit(1);
+            System.err.println("Erro na entrada (" + inputFileName + "): " + e.getMessage());
         } catch (InvalidConfigurationException e) {
-            System.err.println("Erro na configuração: " + e.getMessage());
-            System.exit(1);
+            System.err.println("Erro na configuração (" + inputFileName + "): " + e.getMessage());
         } catch (SimulatorException e) {
-            System.err.println("Erro no simulador: " + e.getMessage());
-            System.exit(1);
+            System.err.println("Erro no simulador (" + inputFileName + "): " + e.getMessage());
         } catch (Exception e) {
-            System.err.println("Erro inesperado: " + e.getMessage());
+            System.err.println("Erro inesperado (" + inputFileName + "): " + e.getMessage());
             e.printStackTrace();
-            System.exit(1);
         }
     }
 }
