@@ -39,15 +39,12 @@ public class FIFOPageReplacementPolicy implements PageReplacementPolicy {
             if (!pagesInMemory.contains(pageIndex)) {
                 pageFaults++;
 
-                // Page is not in memory, remove from swap if it was there
                 swapState.remove(pageIndex);
 
                 if (pagesInMemory.size() < numberOfFrames) {
-                    // Memory has available space
                     pagesInMemory.add(pageIndex);
                     frameQueue.add(pageIndex);
                 } else {
-                    // Memory is full, replace the oldest page (FIFO)
                     int pageToReplace = frameQueue.poll();
                     pagesInMemory.remove(pageToReplace);
                     swapState.add(pageToReplace);
