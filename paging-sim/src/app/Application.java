@@ -1,5 +1,8 @@
 package app;
 
+import exception.InvalidConfigurationException;
+import exception.InvalidInputException;
+import exception.SimulatorException;
 import model.SystemConfiguration;
 import model.PageSequence;
 import parser.InputParser;
@@ -7,7 +10,6 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Classe principal do simulador de memória virtual.
  * Processa entrada padrão e executa simulações de políticas de substituição.
  */
 public class Application {
@@ -32,12 +34,18 @@ public class Application {
             for (PageSequence sequence : sequences) {
                 System.out.println(sequence);
                 // TODO: Implementar simulação das políticas (Tarefa 2+)
-                System.out.println("FIFO");
             }
 
             sc.close();
-        } catch (IllegalArgumentException e) {
+
+        } catch (InvalidInputException e) {
             System.err.println("Erro na entrada: " + e.getMessage());
+            System.exit(1);
+        } catch (InvalidConfigurationException e) {
+            System.err.println("Erro na configuração: " + e.getMessage());
+            System.exit(1);
+        } catch (SimulatorException e) {
+            System.err.println("Erro no simulador: " + e.getMessage());
             System.exit(1);
         } catch (Exception e) {
             System.err.println("Erro inesperado: " + e.getMessage());

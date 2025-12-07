@@ -1,5 +1,7 @@
 package model;
 
+import exception.InvalidInputException;
+import validation.InputValidator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -15,13 +17,10 @@ public class PageSequence {
      * Construtor que cria uma sequência de páginas.
      * 
      * @param requests Lista de índices de páginas requisitadas
-     * @throws IllegalArgumentException se a sequência for inválida
+     * @throws InvalidInputException se a sequência for inválida
      */
     public PageSequence(List<Integer> requests) {
-        if (requests == null || requests.isEmpty()) {
-            throw new IllegalArgumentException("Sequência de requisições não pode ser vazia");
-        }
-        
+        InputValidator.requireNonEmptyList(requests, "Sequência de requisições");
         this.requests = new ArrayList<>(requests);
     }
 
@@ -30,15 +29,11 @@ public class PageSequence {
      * maxPages-1].
      * 
      * @param maxPages Número máximo de páginas do sistema
-     * @throws IllegalArgumentException se algum índice for inválido
+     * @throws InvalidInputException se algum índice for inválido
      */
     public void validate(int maxPages) {
         for (int pageIndex : requests) {
-            if (pageIndex < 0 || pageIndex >= maxPages) {
-                throw new IllegalArgumentException(
-                        String.format("Índice de página inválido: %d (deve estar entre 0 e %d)",
-                                pageIndex, maxPages - 1));
-            }
+            InputValidator.requireInRange(pageIndex, 0, maxPages - 1, "Índice de página");
         }
     }
 

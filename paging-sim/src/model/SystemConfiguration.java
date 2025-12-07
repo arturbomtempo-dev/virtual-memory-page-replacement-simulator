@@ -1,5 +1,7 @@
 package model;
 
+import validation.InputValidator;
+
 /**
  * Representa as configurações do sistema de memória virtual.
  * Armazena os parâmetros de entrada e calcula valores derivados.
@@ -43,18 +45,11 @@ public class SystemConfiguration {
      */
     private void validateInputs(int physicalMemorySize, int virtualMemorySize,
             String architecture, int numberOfPages) {
-        if (physicalMemorySize <= 0) {
-            throw new IllegalArgumentException("Tamanho da memória física deve ser positivo");
-        }
-        if (virtualMemorySize < physicalMemorySize) {
-            throw new IllegalArgumentException("Memória virtual deve ser >= memória física");
-        }
-        if (!architecture.equals("x86") && !architecture.equals("x64")) {
-            throw new IllegalArgumentException("Arquitetura deve ser x86 ou x64");
-        }
-        if (numberOfPages <= 0) {
-            throw new IllegalArgumentException("Número de páginas deve ser positivo");
-        }
+        InputValidator.requirePositive(physicalMemorySize, "Tamanho da memória física");
+        InputValidator.requirePositive(virtualMemorySize, "Tamanho da memória virtual");
+        InputValidator.requireValidArchitecture(architecture);
+        InputValidator.requirePositive(numberOfPages, "Número de páginas");
+        InputValidator.requireVirtualGreaterOrEqualPhysical(virtualMemorySize, physicalMemorySize);
     }
 
     /**
@@ -63,11 +58,7 @@ public class SystemConfiguration {
      */
     private int calculatePageSize() {
         int size = virtualMemorySize / numberOfPages;
-
-        if ((size & (size - 1)) != 0) {
-            throw new IllegalArgumentException("Tamanho de página calculado não é potência de 2");
-        }
-
+        InputValidator.requirePowerOfTwo(size, "Tamanho da página");
         return size;
     }
 

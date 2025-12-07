@@ -1,5 +1,6 @@
 package parser;
 
+import exception.InvalidInputException;
 import model.SystemConfiguration;
 import model.PageSequence;
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ public class InputParser {
      * Lê as configurações do sistema da entrada padrão.
      * 
      * @return Objeto SystemConfiguration com os parâmetros do sistema
-     * @throws IllegalArgumentException se a entrada for inválida
+     * @throws InvalidInputException se a entrada for inválida
      */
     public SystemConfiguration readConfiguration() {
         try {
@@ -34,7 +35,7 @@ public class InputParser {
             return new SystemConfiguration(physicalMemorySize, virtualMemorySize,
                     architecture, numberOfPages);
         } catch (Exception e) {
-            throw new IllegalArgumentException("Erro ao ler configurações: " + e.getMessage(), e);
+            throw new InvalidInputException("Erro ao ler configurações: " + e.getMessage());
         }
     }
 
@@ -43,7 +44,7 @@ public class InputParser {
      * 
      * @param config Configuração do sistema para validação
      * @return Lista de sequências de páginas
-     * @throws IllegalArgumentException se a entrada for inválida
+     * @throws InvalidInputException se a entrada for inválida
      */
     public List<PageSequence> readSequences(SystemConfiguration config) {
         try {
@@ -66,7 +67,7 @@ public class InputParser {
 
             return sequences;
         } catch (Exception e) {
-            throw new IllegalArgumentException("Erro ao ler sequências: " + e.getMessage(), e);
+            throw new InvalidInputException("Erro ao ler sequências: " + e.getMessage());
         }
     }
 
@@ -86,7 +87,7 @@ public class InputParser {
         String[] tokens = line.split("\\s+");
 
         if (tokens.length != numberOfRequests) {
-            throw new IllegalArgumentException(
+            throw new InvalidInputException(
                     String.format("Esperado %d requisições, encontrado %d",
                             numberOfRequests, tokens.length));
         }
@@ -96,7 +97,7 @@ public class InputParser {
                 int pageIndex = Integer.parseInt(token);
                 requests.add(pageIndex);
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("Índice de página inválido: " + token);
+                throw new InvalidInputException("Índice de página", token, "deve ser um número inteiro");
             }
         }
 
@@ -108,11 +109,11 @@ public class InputParser {
      */
     private int readPositiveInt(String fieldName) {
         if (!scanner.hasNextInt()) {
-            throw new IllegalArgumentException(fieldName + " deve ser um número inteiro");
+            throw new InvalidInputException(fieldName, "<não numérico>", "deve ser um número inteiro");
         }
         int value = scanner.nextInt();
         if (value <= 0) {
-            throw new IllegalArgumentException(fieldName + " deve ser positivo");
+            throw new InvalidInputException(fieldName, value, "deve ser positivo");
         }
         return value;
     }
@@ -122,11 +123,11 @@ public class InputParser {
      */
     private String readArchitecture() {
         if (!scanner.hasNext()) {
-            throw new IllegalArgumentException("Arquitetura não encontrada");
+            throw new InvalidInputException("Arquitetura não encontrada");
         }
         String arch = scanner.next().trim();
         if (!arch.equals("x86") && !arch.equals("x64")) {
-            throw new IllegalArgumentException("Arquitetura deve ser x86 ou x64");
+            throw new InvalidInputException("Arquitetura", arch, "deve ser 'x86' ou 'x64'");
         }
         return arch;
     }
