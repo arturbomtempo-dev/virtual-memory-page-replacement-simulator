@@ -5,7 +5,10 @@ import exception.InvalidInputException;
 import exception.SimulatorException;
 import model.SystemConfiguration;
 import model.PageSequence;
+import model.SimulationResult;
 import parser.InputParser;
+import policy.FIFOPageReplacementPolicy;
+import policy.PageReplacementPolicy;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -83,11 +86,14 @@ public class Application {
 
             for (PageSequence sequence : sequences) {
                 writer.println(sequence);
-                // TODO: Implementar simulação das políticas (Tarefa 2+)
-                writer.println("FIFO");
-                writer.println("0");
-                writer.println("0");
-                writer.println("0");
+
+                PageReplacementPolicy fifoPolicy = new FIFOPageReplacementPolicy();
+                SimulationResult result = fifoPolicy.simulate(sequence, config.getNumberOfFrames());
+
+                writer.println(result.getPolicyName());
+                writer.println(result.getExecutionTimeSeconds());
+                writer.println(result.getPageFaults());
+                writer.println(result.getSwapStateFormatted());
             }
         } catch (FileNotFoundException e) {
             System.err.println("Arquivo não encontrado - " + inputFileName);
