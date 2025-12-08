@@ -84,10 +84,11 @@ public class Application {
             writer.println(config.getSwapSize());
             writer.println();
 
-            writer.println(sequences.size());
-            writer.println();
+            for (int i = 0; i < sequences.size(); i++) {
+                PageSequence sequence = sequences.get(i);
 
-            for (PageSequence sequence : sequences) {
+                writer.println(i + 1);
+                writer.println();
                 writer.println(sequence);
 
                 PageReplacementPolicy fifoPolicy = new FIFOPolicy();
