@@ -9,6 +9,7 @@ import model.SimulationResult;
 import parser.InputParser;
 import policy.FIFOPolicy;
 import policy.LRUPolicy;
+import policy.OPTPolicy;
 import policy.RANDPolicy;
 import policy.PageReplacementPolicy;
 import java.io.File;
@@ -112,6 +113,14 @@ public class Application {
                 writer.println(lruResult.getExecutionTimeSeconds());
                 writer.println(lruResult.getPageFaults());
                 writer.println(lruResult.getSwapStateFormatted());
+
+                PageReplacementPolicy optPolicy = new OPTPolicy();
+                SimulationResult optResult = optPolicy.simulate(sequence, config.getNumberOfFrames());
+
+                writer.println(optResult.getPolicyName());
+                writer.println(optResult.getExecutionTimeSeconds());
+                writer.println(optResult.getPageFaults());
+                writer.println(optResult.getSwapStateFormatted());
             }
         } catch (FileNotFoundException e) {
             System.err.println("Arquivo não encontrado - " + inputFileName);
