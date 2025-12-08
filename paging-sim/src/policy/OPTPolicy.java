@@ -93,7 +93,7 @@ public class OPTPolicy implements PageReplacementPolicy {
                 return true;
             }
         }
-        
+
         return false;
     }
 
@@ -104,7 +104,8 @@ public class OPTPolicy implements PageReplacementPolicy {
      * 1. Para cada página em memória, encontra quando será usada novamente no
      * futuro
      * 2. Escolhe a página que será usada mais tarde (ou nunca mais)
-     * 3. Se múltiplas páginas nunca serão usadas, escolhe qualquer uma (primeira)
+     * 3. Se múltiplas páginas têm o mesmo uso futuro, escolhe a última (critério de
+     * desempate)
      * 
      * @param allRequests  Sequência completa de requisições
      * @param currentIndex Posição atual na sequência
@@ -118,7 +119,7 @@ public class OPTPolicy implements PageReplacementPolicy {
             int pageInFrame = frames.get(i).getPageIndex();
             int nextUse = findNextUse(pageInFrame, allRequests, currentIndex + 1);
 
-            if (nextUse > farthestUse) {
+            if (nextUse >= farthestUse) {
                 farthestUse = nextUse;
                 victimIndex = i;
             }
