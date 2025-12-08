@@ -9,14 +9,14 @@ import java.util.*;
  * páginas.
  * Substitui a página que reside na memória há mais tempo (primeira a entrar).
  */
-public class FIFOPageReplacementPolicy implements PageReplacementPolicy {
+public class FIFOPolicy implements PageReplacementPolicy {
 
     private Queue<Integer> frameQueue;
     private Set<Integer> pagesInMemory;
     private Set<Integer> swapState;
     private int pageFaults;
 
-    public FIFOPageReplacementPolicy() {
+    public FIFOPolicy() {
         reset();
     }
 
