@@ -8,6 +8,7 @@ import model.PageSequence;
 import model.SimulationResult;
 import parser.InputParser;
 import policy.FIFOPolicy;
+import policy.LRUPolicy;
 import policy.RANDPolicy;
 import policy.PageReplacementPolicy;
 import java.io.File;
@@ -103,6 +104,14 @@ public class Application {
                 writer.println(randResult.getExecutionTimeSeconds());
                 writer.println(randResult.getPageFaults());
                 writer.println(randResult.getSwapStateFormatted());
+
+                PageReplacementPolicy lruPolicy = new LRUPolicy();
+                SimulationResult lruResult = lruPolicy.simulate(sequence, config.getNumberOfFrames());
+
+                writer.println(lruResult.getPolicyName());
+                writer.println(lruResult.getExecutionTimeSeconds());
+                writer.println(lruResult.getPageFaults());
+                writer.println(lruResult.getSwapStateFormatted());
             }
         } catch (FileNotFoundException e) {
             System.err.println("Arquivo não encontrado - " + inputFileName);
