@@ -12,8 +12,12 @@ FIFO
 RAND
 0
 5
-2
+1
 LRU
 0
 5
 2
+MIN
+0
+5
+1
