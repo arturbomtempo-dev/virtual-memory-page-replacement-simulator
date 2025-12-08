@@ -60,7 +60,7 @@ public final class InputValidator {
                     architecture,
                     "deve ser 'x86' ou 'x64'");
         }
-        
+
         return architecture;
     }
 
