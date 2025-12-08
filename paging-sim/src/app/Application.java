@@ -7,8 +7,9 @@ import model.SystemConfiguration;
 import model.PageSequence;
 import model.SimulationResult;
 import parser.InputParser;
-import policy.FIFOPageReplacementPolicy;
-import policy.RANDPageReplacementPolicy;
+import policy.FIFOPolicy;
+import policy.LRUPolicy;
+import policy.RANDPolicy;
 import policy.PageReplacementPolicy;
 import java.io.File;
 import java.io.FileInputStream;
@@ -88,7 +89,7 @@ public class Application {
             for (PageSequence sequence : sequences) {
                 writer.println(sequence);
 
-                PageReplacementPolicy fifoPolicy = new FIFOPageReplacementPolicy();
+                PageReplacementPolicy fifoPolicy = new FIFOPolicy();
                 SimulationResult fifoResult = fifoPolicy.simulate(sequence, config.getNumberOfFrames());
 
                 writer.println(fifoResult.getPolicyName());
@@ -96,13 +97,21 @@ public class Application {
                 writer.println(fifoResult.getPageFaults());
                 writer.println(fifoResult.getSwapStateFormatted());
 
-                PageReplacementPolicy randPolicy = new RANDPageReplacementPolicy();
+                PageReplacementPolicy randPolicy = new RANDPolicy();
                 SimulationResult randResult = randPolicy.simulate(sequence, config.getNumberOfFrames());
 
                 writer.println(randResult.getPolicyName());
                 writer.println(randResult.getExecutionTimeSeconds());
                 writer.println(randResult.getPageFaults());
                 writer.println(randResult.getSwapStateFormatted());
+
+                PageReplacementPolicy lruPolicy = new LRUPolicy();
+                SimulationResult lruResult = lruPolicy.simulate(sequence, config.getNumberOfFrames());
+
+                writer.println(lruResult.getPolicyName());
+                writer.println(lruResult.getExecutionTimeSeconds());
+                writer.println(lruResult.getPageFaults());
+                writer.println(lruResult.getSwapStateFormatted());
             }
         } catch (FileNotFoundException e) {
             System.err.println("Arquivo não encontrado - " + inputFileName);

@@ -8,14 +8,14 @@ import java.util.*;
  * Implementação da política RAND (Random) de substituição de páginas.
  * Substitui um frame escolhido aleatoriamente da memória física.
  */
-public class RANDPageReplacementPolicy implements PageReplacementPolicy {
+public class RANDPolicy implements PageReplacementPolicy {
 
     private Set<Integer> pagesInMemory;
     private Set<Integer> swapState;
     private int pageFaults;
     private Random random;
 
-    public RANDPageReplacementPolicy() {
+    public RANDPolicy() {
         reset();
     }
 
