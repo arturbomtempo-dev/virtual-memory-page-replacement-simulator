@@ -67,7 +67,7 @@ public class Application {
      */
     private static void processFile(File inputFile) {
         String inputFileName = inputFile.getName();
-        String outputFileName = inputFileName.replace(".txt", "_saida.txt");
+        String outputFileName = inputFileName.replace(".txt", "_output.txt");
         File outputFile = new File(OUTPUT_DIR, outputFileName);
 
         try (Scanner sc = new Scanner(new FileInputStream(inputFile));
