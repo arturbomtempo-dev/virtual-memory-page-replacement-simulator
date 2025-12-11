@@ -4,7 +4,12 @@ import validation.InputValidator;
 
 /**
  * Representa as configurações do sistema de memória virtual.
- * Armazena os parâmetros de entrada e calcula valores derivados.
+ * Armazena os parâmetros de entrada e calcula automaticamente valores
+ * derivados:
+ * - Tamanho da página: virtualMemorySize / numberOfPages (deve ser potência de
+ * 2)
+ * - Número de frames: physicalMemorySize / pageSize
+ * - Tamanho do swap: (numberOfPages - numberOfFrames) * pageSize
  */
 public class SystemConfiguration {
 
@@ -13,19 +18,11 @@ public class SystemConfiguration {
     private final String architecture;
     private final int numberOfPages;
 
+    // Valores calculados automaticamente
     private final int pageSize;
     private final int numberOfFrames;
     private final int swapSize;
 
-    /**
-     * Construtor que calcula automaticamente os parâmetros derivados.
-     * 
-     * @param physicalMemorySize Tamanho da memória física em bytes
-     * @param virtualMemorySize  Tamanho da memória virtual em bytes
-     * @param architecture       Arquitetura do sistema (x86 ou x64)
-     * @param numberOfPages      Número total de páginas virtuais
-     * @throws IllegalArgumentException se os parâmetros forem inválidos
-     */
     public SystemConfiguration(int physicalMemorySize, int virtualMemorySize,
             String architecture, int numberOfPages) {
         validateInputs(physicalMemorySize, virtualMemorySize, architecture, numberOfPages);
@@ -40,9 +37,6 @@ public class SystemConfiguration {
         this.swapSize = (numberOfPages - numberOfFrames) * pageSize;
     }
 
-    /**
-     * Valida os parâmetros de entrada.
-     */
     private void validateInputs(int physicalMemorySize, int virtualMemorySize,
             String architecture, int numberOfPages) {
         InputValidator.requirePositive(physicalMemorySize, "Tamanho da memória física");
@@ -52,10 +46,6 @@ public class SystemConfiguration {
         InputValidator.requireVirtualGreaterOrEqualPhysical(virtualMemorySize, physicalMemorySize);
     }
 
-    /**
-     * Calcula o tamanho da página (deve ser potência de 2).
-     * SP = V / P
-     */
     private int calculatePageSize() {
         int size = virtualMemorySize / numberOfPages;
         InputValidator.requirePowerOfTwo(size, "Tamanho da página");

@@ -9,7 +9,8 @@ import java.util.Scanner;
 
 /**
  * Parser responsável por ler e validar a entrada padrão (stdin).
- * Processa configurações do sistema e sequências de requisições.
+ * Processa configurações do sistema (memória, arquitetura, páginas) e
+ * sequências de requisições conforme especificação do projeto.
  */
 public class InputParser {
 
@@ -19,12 +20,6 @@ public class InputParser {
         this.scanner = scanner;
     }
 
-    /**
-     * Lê as configurações do sistema da entrada padrão.
-     * 
-     * @return Objeto SystemConfiguration com os parâmetros do sistema
-     * @throws InvalidInputException se a entrada for inválida
-     */
     public SystemConfiguration readConfiguration() {
         try {
             int physicalMemorySize = readPositiveInt("Tamanho da memória física");
@@ -39,13 +34,6 @@ public class InputParser {
         }
     }
 
-    /**
-     * Lê todas as sequências de requisições da entrada padrão.
-     * 
-     * @param config Configuração do sistema para validação
-     * @return Lista de sequências de páginas
-     * @throws InvalidInputException se a entrada for inválida
-     */
     public List<PageSequence> readSequences(SystemConfiguration config) {
         try {
             if (scanner.hasNextLine()) {
@@ -71,9 +59,6 @@ public class InputParser {
         }
     }
 
-    /**
-     * Lê uma única sequência de requisições.
-     */
     private PageSequence readSingleSequence() {
         int numberOfRequests = readPositiveInt("Número de requisições");
 
@@ -104,9 +89,6 @@ public class InputParser {
         return new PageSequence(requests);
     }
 
-    /**
-     * Lê um inteiro positivo da entrada.
-     */
     private int readPositiveInt(String fieldName) {
         if (!scanner.hasNextInt()) {
             throw new InvalidInputException(fieldName, "<não numérico>", "deve ser um número inteiro");
@@ -118,9 +100,6 @@ public class InputParser {
         return value;
     }
 
-    /**
-     * Lê e valida a arquitetura do sistema.
-     */
     private String readArchitecture() {
         if (!scanner.hasNext()) {
             throw new InvalidInputException("Arquitetura não encontrada");

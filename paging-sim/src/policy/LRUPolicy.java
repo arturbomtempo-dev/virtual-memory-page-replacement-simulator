@@ -10,8 +10,9 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Implementação da política LRU (Least Recently Used).
- * Substitui a página cujo último acesso ocorreu no tempo mais distante.
+ * Política LRU (Least Recently Used) de substituição de páginas.
+ * Remove a página cujo último acesso ocorreu no tempo mais distante.
+ * Atualiza timestamp tanto em hits quanto em misses para refletir uso real.
  */
 public class LRUPolicy implements PageReplacementPolicy {
 
@@ -55,13 +56,6 @@ public class LRUPolicy implements PageReplacementPolicy {
                 pageFaultCount, swapState);
     }
 
-    /**
-     * Processa uma requisição de página.
-     * 
-     * @param pageIndex      Índice da página requisitada
-     * @param numberOfFrames Número total de frames disponíveis
-     * @param currentTime    Timestamp atual (índice na sequência)
-     */
     private void processPageRequest(int pageIndex, int numberOfFrames, long currentTime) {
         MemoryFrame existingFrame = findFrameByPage(pageIndex);
 
@@ -80,12 +74,6 @@ public class LRUPolicy implements PageReplacementPolicy {
         }
     }
 
-    /**
-     * Encontra o frame que contém a página especificada.
-     * 
-     * @param pageIndex Índice da página procurada
-     * @return Frame contendo a página, ou null se não encontrado
-     */
     private MemoryFrame findFrameByPage(int pageIndex) {
         for (MemoryFrame frame : frames) {
             if (frame.getPageIndex() == pageIndex) {
@@ -95,12 +83,6 @@ public class LRUPolicy implements PageReplacementPolicy {
         return null;
     }
 
-    /**
-     * Encontra o índice do frame vítima usando a política LRU.
-     * Seleciona o frame com o menor lastAccessTime (menos recentemente usado).
-     * 
-     * @return Índice do frame a ser substituído
-     */
     private int findLRUVictim() {
         int victimIndex = 0;
         long oldestAccessTime = frames.get(0).getLastAccessTime();
@@ -116,12 +98,6 @@ public class LRUPolicy implements PageReplacementPolicy {
         return victimIndex;
     }
 
-    /**
-     * Calcula quais páginas estão no swap (não estão em memória).
-     * 
-     * @param sequence Sequência de requisições original
-     * @return Conjunto de páginas no swap
-     */
     private Set<Integer> calculateSwapState(PageSequence sequence) {
         Set<Integer> allPages = new HashSet<>(sequence.getRequests());
 

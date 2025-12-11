@@ -1,8 +1,7 @@
 package exception;
 
 /**
- * Exceção base para erros do simulador.
- * Representa erros gerais que podem ocorrer durante a execução.
+ * Exceção base para todos os erros do simulador.
  */
 public class SimulatorException extends RuntimeException {
 

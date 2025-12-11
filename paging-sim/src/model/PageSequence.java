@@ -1,6 +1,5 @@
 package model;
 
-import exception.InvalidInputException;
 import validation.InputValidator;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,45 +7,27 @@ import java.util.List;
 
 /**
  * Representa uma sequência de requisições de páginas.
+ * Valida que todos os índices estão no intervalo [0, maxPages-1].
  */
 public class PageSequence {
 
     private final List<Integer> requests;
 
-    /**
-     * Construtor que cria uma sequência de páginas.
-     * 
-     * @param requests Lista de índices de páginas requisitadas
-     * @throws InvalidInputException se a sequência for inválida
-     */
     public PageSequence(List<Integer> requests) {
         InputValidator.requireNonEmptyList(requests, "Sequência de requisições");
         this.requests = new ArrayList<>(requests);
     }
 
-    /**
-     * Valida se todos os índices de página estão no intervalo válido [0,
-     * maxPages-1].
-     * 
-     * @param maxPages Número máximo de páginas do sistema
-     * @throws InvalidInputException se algum índice for inválido
-     */
     public void validate(int maxPages) {
         for (int pageIndex : requests) {
             InputValidator.requireInRange(pageIndex, 0, maxPages - 1, "Índice de página");
         }
     }
 
-    /**
-     * Retorna a lista de requisições (somente leitura).
-     */
     public List<Integer> getRequests() {
         return Collections.unmodifiableList(requests);
     }
 
-    /**
-     * Retorna o tamanho da sequência.
-     */
     public int size() {
         return requests.size();
     }

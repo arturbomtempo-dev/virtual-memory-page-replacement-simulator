@@ -5,8 +5,9 @@ import model.SimulationResult;
 import java.util.*;
 
 /**
- * Implementação da política RAND (Random) de substituição de páginas.
+ * Política RAND (Random) de substituição de páginas.
  * Substitui um frame escolhido aleatoriamente da memória física.
+ * Converte HashSet para ArrayList para permitir acesso por índice aleatório.
  */
 public class RANDPolicy implements PageReplacementPolicy {
 
@@ -59,11 +60,6 @@ public class RANDPolicy implements PageReplacementPolicy {
                 new HashSet<>(swapState));
     }
 
-    /**
-     * Seleciona uma página aleatória da memória física.
-     * 
-     * @return índice da página selecionada aleatoriamente
-     */
     private int selectRandomPage() {
         List<Integer> pages = new ArrayList<>(pagesInMemory);
         int randomIndex = random.nextInt(pages.size());

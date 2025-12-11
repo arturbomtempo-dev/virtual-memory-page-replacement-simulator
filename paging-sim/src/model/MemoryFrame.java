@@ -2,29 +2,21 @@ package model;
 
 /**
  * Representa um frame na memória física.
- * Armazena o índice da página carregada e metadados para as políticas.
+ * Armazena o índice da página carregada e metadados (timestamps) utilizados
+ * pelas políticas de substituição, especialmente LRU.
  */
 public class MemoryFrame {
 
     private int pageIndex;
-    private long lastAccessTime;
-    private long loadTime;
+    private long lastAccessTime; // Timestamp do último acesso (LRU)
+    private long loadTime; // Timestamp de quando a página foi carregada
 
-    /**
-     * Construtor de um frame de memória.
-     * 
-     * @param pageIndex   Índice da página carregada
-     * @param currentTime Timestamp atual da simulação
-     */
     public MemoryFrame(int pageIndex, long currentTime) {
         this.pageIndex = pageIndex;
         this.lastAccessTime = currentTime;
         this.loadTime = currentTime;
     }
 
-    /**
-     * Atualiza o timestamp do último acesso (usado por LRU).
-     */
     public void updateAccessTime(long currentTime) {
         this.lastAccessTime = currentTime;
     }

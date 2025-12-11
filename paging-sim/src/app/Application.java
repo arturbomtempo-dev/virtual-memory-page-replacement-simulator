@@ -20,7 +20,10 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Processa arquivos de entrada da pasta input/ e gera saídas na pasta output/.
+ * Aplicação principal do simulador de memória virtual.
+ * Processa todos os arquivos .txt da pasta input/ e gera saídas na pasta
+ * output/
+ * aplicando as 4 políticas de substituição: FIFO, RAND, LRU e MIN (OPT).
  */
 public class Application {
 
@@ -51,9 +54,6 @@ public class Application {
 
     }
 
-    /**
-     * Cria a pasta output se não existir.
-     */
     private static void createOutputDirectory() {
         File outputDir = new File(OUTPUT_DIR);
 
@@ -62,9 +62,6 @@ public class Application {
         }
     }
 
-    /**
-     * Processa um arquivo de entrada e gera o arquivo de saída correspondente.
-     */
     private static void processFile(File inputFile) {
         String inputFileName = inputFile.getName();
         String outputFileName = inputFileName.replace(".txt", "_output.txt");
@@ -91,37 +88,22 @@ public class Application {
                 writer.println();
                 writer.println(sequence);
 
-                PageReplacementPolicy fifoPolicy = new FIFOPolicy();
-                SimulationResult fifoResult = fifoPolicy.simulate(sequence, config.getNumberOfFrames());
+                // Executa todas as políticas na ordem: FIFO, RAND, LRU, MIN
+                PageReplacementPolicy[] policies = {
+                        new FIFOPolicy(),
+                        new RANDPolicy(),
+                        new LRUPolicy(),
+                        new OPTPolicy()
+                };
 
-                writer.println(fifoResult.getPolicyName());
-                writer.println(fifoResult.getExecutionTimeSeconds());
-                writer.println(fifoResult.getPageFaults());
-                writer.println(fifoResult.getSwapStateFormatted());
+                for (PageReplacementPolicy policy : policies) {
+                    SimulationResult result = policy.simulate(sequence, config.getNumberOfFrames());
 
-                PageReplacementPolicy randPolicy = new RANDPolicy();
-                SimulationResult randResult = randPolicy.simulate(sequence, config.getNumberOfFrames());
-
-                writer.println(randResult.getPolicyName());
-                writer.println(randResult.getExecutionTimeSeconds());
-                writer.println(randResult.getPageFaults());
-                writer.println(randResult.getSwapStateFormatted());
-
-                PageReplacementPolicy lruPolicy = new LRUPolicy();
-                SimulationResult lruResult = lruPolicy.simulate(sequence, config.getNumberOfFrames());
-
-                writer.println(lruResult.getPolicyName());
-                writer.println(lruResult.getExecutionTimeSeconds());
-                writer.println(lruResult.getPageFaults());
-                writer.println(lruResult.getSwapStateFormatted());
-
-                PageReplacementPolicy optPolicy = new OPTPolicy();
-                SimulationResult optResult = optPolicy.simulate(sequence, config.getNumberOfFrames());
-
-                writer.println(optResult.getPolicyName());
-                writer.println(optResult.getExecutionTimeSeconds());
-                writer.println(optResult.getPageFaults());
-                writer.println(optResult.getSwapStateFormatted());
+                    writer.println(result.getPolicyName());
+                    writer.println(result.getExecutionTimeSeconds());
+                    writer.println(result.getPageFaults());
+                    writer.println(result.getSwapStateFormatted());
+                }
             }
         } catch (FileNotFoundException e) {
             System.err.println("Arquivo não encontrado - " + inputFileName);

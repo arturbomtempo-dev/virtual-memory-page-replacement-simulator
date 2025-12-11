@@ -6,23 +6,16 @@ import java.util.TreeSet;
 
 /**
  * Representa o resultado de uma simulação de política de substituição.
- * Contém métricas de desempenho e estado final.
+ * Contém métricas de desempenho (page faults, tempo) e estado final do swap.
+ * Utiliza TreeSet para manter o swap ordenado na saída.
  */
 public class SimulationResult {
 
     private final String policyName;
     private final long executionTimeSeconds;
     private final int pageFaults;
-    private final Set<Integer> swapState;
+    private final Set<Integer> swapState; // TreeSet mantém ordenação automática
 
-    /**
-     * Construtor do resultado da simulação.
-     * 
-     * @param policyName           Nome da política executada
-     * @param executionTimeSeconds Tempo de execução em segundos
-     * @param pageFaults           Número de page faults ocorridos
-     * @param swapState            Conjunto de páginas no swap ao final
-     */
     public SimulationResult(String policyName, long executionTimeSeconds,
             int pageFaults, Set<Integer> swapState) {
         this.policyName = policyName;
@@ -43,17 +36,10 @@ public class SimulationResult {
         return pageFaults;
     }
 
-    /**
-     * Retorna o estado do swap (somente leitura, ordenado).
-     */
     public Set<Integer> getSwapState() {
         return Collections.unmodifiableSet(swapState);
     }
 
-    /**
-     * Retorna representação formatada do estado do swap.
-     * Se vazio, retorna "0". Caso contrário, retorna páginas separadas por espaço.
-     */
     public String getSwapStateFormatted() {
         if (swapState.isEmpty()) {
             return "0";

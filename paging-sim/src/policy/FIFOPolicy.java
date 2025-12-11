@@ -5,14 +5,14 @@ import model.SimulationResult;
 import java.util.*;
 
 /**
- * Implementação da política FIFO (First-In, First-Out) de substituição de
- * páginas.
- * Substitui a página que reside na memória há mais tempo (primeira a entrar).
+ * Política FIFO (First-In, First-Out) de substituição de páginas.
+ * Remove a página que está há mais tempo na memória (primeira da fila).
+ * Mantém sincronização entre frameQueue e pagesInMemory para consistência.
  */
 public class FIFOPolicy implements PageReplacementPolicy {
 
-    private Queue<Integer> frameQueue;
-    private Set<Integer> pagesInMemory;
+    private Queue<Integer> frameQueue; // Ordem de chegada dos frames
+    private Set<Integer> pagesInMemory; // Lookup rápido O(1)
     private Set<Integer> swapState;
     private int pageFaults;
 

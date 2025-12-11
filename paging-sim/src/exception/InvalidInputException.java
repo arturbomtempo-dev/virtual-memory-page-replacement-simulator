@@ -2,8 +2,7 @@ package exception;
 
 /**
  * Exceção lançada quando a entrada fornecida é inválida.
- * Pode indicar formato incorreto, valores fora do intervalo ou dados
- * inconsistentes.
+ * Armazena o campo e valor inválido para facilitar diagnóstico.
  */
 public class InvalidInputException extends SimulatorException {
 
