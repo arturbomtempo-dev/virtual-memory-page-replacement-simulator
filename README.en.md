@@ -29,7 +29,7 @@
 ---
 
 <div align="center">
-    <p>🇧🇷 <a href="https://github.com/arturbomtempo-dev/virtual-memory-page-replacement-simulator/blob/main/README.en.md" target="_blank"><strong>Versão em Português disponível aqui</strong></a></p>
+    <p>🇧🇷 <a href="https://github.com/arturbomtempo-dev/virtual-memory-page-replacement-simulator/blob/main/README.md" target="_blank"><strong>Versão em Português disponível aqui</strong></a></p>
 </div>
 
 <br>
