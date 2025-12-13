@@ -84,6 +84,11 @@ public class Application {
             for (int i = 0; i < sequences.size(); i++) {
                 PageSequence sequence = sequences.get(i);
 
+                // Adiciona linha em branco antes da segunda sequência em diante
+                if (i > 0) {
+                    writer.println();
+                }
+
                 writer.println(i + 1);
                 writer.println();
                 writer.println(sequence);
