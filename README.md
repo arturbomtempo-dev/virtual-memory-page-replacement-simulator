@@ -231,19 +231,21 @@ Desenvolvido por Eduarda Vieira 👋🏻. Entre em contato:
 
 Copyright (c) 2025 Artur Bomtempo Colen
 
-Por meio deste, é concedida permissão, gratuitamente, a qualquer pessoa que obtenha uma cópia
-deste software e dos arquivos de documentação associados (o "Software"), para tratar
-no Software sem restrição, incluindo, sem limitação, os direitos
-de usar, copiar, modificar, mesclar, publicar, distribuir, sublicenciar e/ou vender
-cópias do Software, e permitir que pessoas a quem o Software seja fornecido o façam, sujeito às seguintes condições:
+É concedida, gratuitamente, permissão a qualquer pessoa que obtenha uma cópia
+deste software e dos arquivos de documentação associados (o “Software”), para
+utilizar o Software sem restrições, incluindo, sem limitação, os direitos de
+usar, copiar, modificar, mesclar, publicar, distribuir, sublicenciar e/ou vender
+cópias do Software, bem como permitir que pessoas a quem o Software seja
+fornecido o façam, desde que sujeitas às seguintes condições:
 
-O aviso de copyright acima e este aviso de permissão devem ser incluídos em todas
-as cópias ou porções substanciais do Software.
+O aviso de copyright acima e esta permissão deverão ser incluídos em todas as
+cópias ou partes substanciais do Software.
 
-O SOFTWARE É FORNECIDO "COMO ESTÁ", SEM GARANTIA DE QUALQUER NATUREZA, EXPRESSA OU
-IMPLÍCITA, INCLUINDO, MAS NÃO SE LIMITANDO ÀS GARANTIAS DE COMERCIALIZAÇÃO,
-ADEQUAÇÃO A UM FIM ESPECÍFICO E NÃO INFRAÇÃO. EM NENHUM CASO OS
-AUTORES OU TITULARES DOS DIREITOS AUTORAIS SERÃO RESPONSÁVEIS POR QUALQUER RECLAMAÇÃO, DANOS OU OUTRAS
-RESPONSABILIDADES, SEJA EM UMA AÇÃO DE CONTRATO, AGRAVO OU DE OUTRA FORMA, DECORRENTES DE,
-OU EM CONEXÃO COM O SOFTWARE OU O USO OU OUTRAS NEGOCIAÇÕES NO
-SOFTWARE.
+O SOFTWARE É FORNECIDO “NO ESTADO EM QUE SE ENCONTRA”, SEM GARANTIA DE
+QUALQUER TIPO, EXPRESSA OU IMPLÍCITA, INCLUINDO, MAS NÃO SE LIMITANDO, ÀS
+GARANTIAS DE COMERCIALIZAÇÃO, ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA E
+NÃO VIOLAÇÃO. EM NENHUMA HIPÓTESE OS AUTORES OU DETENTORES DOS DIREITOS
+AUTORAIS SERÃO RESPONSÁVEIS POR QUALQUER REIVINDICAÇÃO, DANO OU OUTRA
+RESPONSABILIDADE, SEJA EM UMA AÇÃO CONTRATUAL, EXTRACONTRATUAL OU DE
+OUTRA NATUREZA, DECORRENTE DE, OU RELACIONADA AO SOFTWARE OU AO USO OU
+OUTRAS NEGOCIAÇÕES COM O SOFTWARE.
