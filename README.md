@@ -209,18 +209,14 @@ As seguintes ferramentas e linguagens foram utilizadas no desenvolvimento deste 
 | [<img loading="lazy" src="https://avatars.githubusercontent.com/u/96635074?v=4" width=115><br><sub>Artur Bomtempo</sub>](https://arturbomtempo.dev/) | [<img loading="lazy" src="https://avatars.githubusercontent.com/u/159597766?v=4" width=115><br><sub>Eduarda Vieira</sub>](https://www.linkedin.com/in/eduarda-vieira-gon%C3%A7alves-01a584297/) |
 | :--------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
 
-### Artur Bomtempo
+Desenvolvido por Artur Bomtempo e Eduarda Vieira 👋🏻. Entre em contato:
 
-Desenvolvido por Artur Bomtempo 👋🏻. Entre em contato:
-
+**Artur Bomtempo:**  
 [![Gmail Badge](https://img.shields.io/badge/-arturbcolen@gmail.com-D14836?style=flat-square&logo=Gmail&logoColor=white&link=mailto:arturbcolen@gmail.com)](mailto:arturbcolen@gmail.com)
 [![LinkedIn Badge](https://img.shields.io/badge/-Artur%20Bomtempo-0A66C2?style=flat-square&logo=LinkedIn&logoColor=white&link=https://www.linkedin.com/in/artur-bomtempo/)](https://www.linkedin.com/in/artur-bomtempo/)
 [![Instagram Badge](https://img.shields.io/badge/-@arturbomtempo.dev-E4405F?style=flat-square&logo=Instagram&logoColor=white&link=https://www.instagram.com/arturbomtempo.dev/)](https://www.instagram.com/arturbomtempo.dev/)
 
-### Eduarda Vieira
-
-Desenvolvido por Eduarda Vieira 👋🏻. Entre em contato:
-
+**Eduarda Vieira:**  
 [![Gmail Badge](https://img.shields.io/badge/-eduarda.vieira.goncalves7@gmail.com-D14836?style=flat-square&logo=Gmail&logoColor=white&link=mailto:eduarda.vieira.goncalves7@gmail.com)](mailto:eduarda.vieira.goncalves7@gmail.com)
 [![LinkedIn Badge](https://img.shields.io/badge/-Eduarda%20Vieira-0A66C2?style=flat-square&logo=LinkedIn&logoColor=white&link=https://www.linkedin.com/in/eduarda-vieira-gon%C3%A7alves-01a584297/)](https://www.linkedin.com/in/eduarda-vieira-gon%C3%A7alves-01a584297/)
 [![Instagram Badge](https://img.shields.io/badge/-@eduardavieira.dev-E4405F?style=flat-square&logo=Instagram&logoColor=white&link=https://www.instagram.com/eduardavieira.dev/)](https://www.instagram.com/eduardavieira.dev/)
